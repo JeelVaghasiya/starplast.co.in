@@ -25,9 +25,9 @@ export default function ProductCard({ product }: { product: Product }) {
             href={`/product-view?id=${product.id}`}
             className="bg-white rounded-lg p-5 shadow-sm hover:shadow-md transition-all group cursor-pointer flex flex-col h-full border border-transparent hover:border-blue-50"
         >
-            <div className="aspect-square bg-[#F3F4F6] w-full rounded mb-5 flex items-center justify-center relative overflow-hidden">
+            <div className="aspect-square bg-[#F3F4F6] w-full rounded mb-5 flex items-center justify-center relative overflow-hidden protected-img" onContextMenu={(e) => e.preventDefault()}>
                 {activeImage ? (
-                    <img src={activeImage} alt={product.name} className="object-contain w-full h-full" />
+                    <img src={activeImage} alt={product.name} className="object-contain w-full h-full" draggable={false} />
                 ) : (
                     <div className="text-[10px] text-gray-300 font-bold tracking-widest uppercase">Industrial Product</div>
                 )}

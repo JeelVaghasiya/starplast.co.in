@@ -23,13 +23,15 @@ function RelatedProductCard({ product }: { product: Product }) {
         <div className="bg-white rounded-lg border border-gray-200 overflow-hidden flex flex-col min-w-[280px] w-[280px] md:min-w-[320px] md:w-[320px]">
             <Link
                 href={`/product-view?id=${product.id}`}
-                className="aspect-[4/3] bg-[#F3F4F6] flex items-center justify-center overflow-hidden p-4 group"
+                className="aspect-[4/3] bg-[#F3F4F6] flex items-center justify-center overflow-hidden p-4 group protected-img"
+                onContextMenu={(e) => e.preventDefault()}
             >
                 {activeImage ? (
                     <img
                         src={activeImage}
                         alt={product.name}
                         className="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500"
+                        draggable={false}
                     />
                 ) : (
                     <div className="text-[10px] text-gray-300 font-bold uppercase tracking-widest text-center">Industrial Product</div>
@@ -146,15 +148,15 @@ export default function ProductDetailClient({
                     {/* ── Left: Image Gallery ── */}
                     <div>
                         {/* Main Image */}
-                        <div className="aspect-square bg-white rounded-lg border border-gray-200 flex items-center justify-center relative overflow-hidden mb-4 p-8">
+                        <div className="aspect-square bg-white rounded-lg border border-gray-200 flex items-center justify-center relative overflow-hidden mb-4 p-8 protected-img" onContextMenu={(e) => e.preventDefault()}>
                             {allImages.length > 0 ? (
-                                <img src={allImages[selectedThumb] || allImages[0]} alt={product.name} className="object-contain w-full h-full" />
+                                <img src={allImages[selectedThumb] || allImages[0]} alt={product.name} className="object-contain w-full h-full" draggable={false} />
                             ) : (
                                 <div className="text-gray-300 text-sm font-bold tracking-widest uppercase">Product Image</div>
                             )}
                             <button
                                 onClick={() => setIsZoomed(true)}
-                                className="absolute bottom-4 right-4 w-8 h-8 bg-white rounded-full shadow flex items-center justify-center text-gray-400 hover:text-[#1A1A54] transition-colors"
+                                className="absolute bottom-4 right-4 w-8 h-8 bg-white rounded-full shadow flex items-center justify-center text-gray-400 hover:text-[#1A1A54] transition-colors z-10"
                             >
                                 <ZoomIn className="w-4 h-4" />
                             </button>
@@ -172,7 +174,7 @@ export default function ProductDetailClient({
                                             : "border-gray-200 hover:border-gray-300"
                                             } bg-white p-1`}
                                     >
-                                        <img src={imgUrl} alt="Thumbnail" className="w-full h-full object-contain" />
+                                        <img src={imgUrl} alt="Thumbnail" className="w-full h-full object-contain" draggable={false} onContextMenu={(e) => e.preventDefault()} />
                                     </button>
                                 ))}
                             </div>
@@ -372,6 +374,9 @@ export default function ProductDetailClient({
                         src={allImages[selectedThumb] || allImages[0]}
                         alt={product.name}
                         className="max-w-full max-h-full object-contain animate-in zoom-in-95 duration-200"
+                        draggable={false}
+                        onContextMenu={(e) => e.preventDefault()}
+                        style={{ WebkitUserSelect: 'none', userSelect: 'none', pointerEvents: 'none' }}
                     />
                     <button
                         onClick={() => setIsZoomed(false)}

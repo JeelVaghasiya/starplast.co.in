@@ -149,9 +149,9 @@ export default function CartPage() {
                                 className="bg-white rounded-xl border border-gray-200 p-5 md:p-6 flex flex-col md:flex-row gap-5"
                             >
                                 {/* Product Preview */}
-                                <div className="w-full md:w-40 h-40 bg-[#F9FAFB] rounded-lg border border-gray-100 flex items-center justify-center shrink-0 overflow-hidden">
+                                <div className="w-full md:w-40 h-40 bg-[#F9FAFB] rounded-lg border border-gray-100 flex items-center justify-center shrink-0 overflow-hidden protected-img" onContextMenu={(e) => e.preventDefault()}>
                                     {item.image ? (
-                                        <img src={item.image} alt={item.name} className="w-full h-full object-contain" />
+                                        <img src={item.image} alt={item.name} className="w-full h-full object-contain" draggable={false} />
                                     ) : (
                                         <div className="flex flex-col items-center justify-center">
                                             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D1D5DB" strokeWidth="1.5"><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 16l5-5 4 4 4-4 5 5" /></svg>
